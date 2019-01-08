@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+<html lang="" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hexo</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="tingfeng,"> 
+    <meta name="description" content="
+深拷贝和浅拷贝的主要区别就是其在内存中的存储数据类型不同。
+
+
+
+堆和栈都是内存中划分出来用来存储的区域。
+
+
+栈（stack）为自动分配的内存空间，它由系统自动释放；
+堆（heap）则是动态分配,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle"></h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title"></h1>
+        <div class="stuff">
+            <span>一月 08, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>1.概念介绍</p>
+<p>1.1.同部</p>
+<p><img src="E:/%E6%9C%89%E9%81%93%E4%BA%91%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/m15518161062_1@163.com/87f7ff0e395a4dfcbe119cba289492ee/%E5%90%8C%E6%AD%A5.png" alt="img"></p>
+<p>客户端发起请求，服务器进行处理及响应，而这个过程中客户端完全是在等待。</p>
+<p>1.2.异步</p>
+<p><img src="E:/%E6%9C%89%E9%81%93%E4%BA%91%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/m15518161062_1@163.com/066a5c8c9e0a4afd9beeaaa76e51df97/%E5%BC%82%E6%AD%A5.png" alt="img"></p>
+<p>客户端发起请求，服务端进行处理及相应，而这时客户端完全可以进行其他操作，不需等待。</p>
+<p>1.3.XMLHttpRequest</p>
+<ul>
+<li>·运用HTML和CSS来实现页面，表达信息；</li>
+<li>·运用XMLHttpRequest和web服务器进行数据的异步交换；</li>
+<li>·运用JavaScript操作DOM，实现动态局部刷新。</li>
+</ul>
+<p>首先需要实例化一个XHR对象：</p>
+<p>var request = new XMLHttpRequest(); </p>
+<p>兼容模式</p>
+<p>var request; if(window.XMLHttpRequest){    request = new XMLHttpRequest();//other broswer; }else{    request = new ActiveXObject(“Microsoft.XMLHTTP”);//IE5,IE6 } </p>
+<p>2.HTTP请求</p>
+<p>2.1HTTP概念</p>
+<p>HTTP是计算机通过网络进行通信的规则，是浏览器能够从web服务器请求信息和服务。它是一种无状态协议，也就是说服务端不保留连接的相关信息，当发起请求、返回响应之后，连接就被关闭了，整个处理过程是没有记忆的</p>
+<p>一个完整的HTTP请求过程，通常有下面7个步骤：</p>
+<ol>
+<li>建立TCP连接；          </li>
+<li>Web浏览器向Web服务器发送请求命令；</li>
+<li>Web浏览器发送请求头信息；</li>
+<li>Web服务器应答；</li>
+<li>Web服务器发送应答头信息；</li>
+<li>Web服务器向浏览器发送数据；</li>
+<li>Web服务器关闭TCP连接</li>
+</ol>
+<p>2.2HTTP请求</p>
+<p>一般来说，一个HTTP请求由四部分组成：</p>
+<ol>
+<li>HTTP请求的方法，比如是GET请求还是POST请求；</li>
+<li>正在请求的URL，也就是请求的服务器的地址；</li>
+<li>请求头，包含一些客户端环境信息，身份验证信息等；</li>
+<li>请求体，也就是请求正文，请求正文中可以包含客户端提交的查询字符串信息，表单信息等</li>
+</ol>
+<p>2.3GET和POST</p>
+<p><img src="E:/%E6%9C%89%E9%81%93%E4%BA%91%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/m15518161062_1@163.com/1754d1ae52754b35973644f26e697c4d/get%E5%92%8Cpost.png" alt="img"></p>
+<p>  从字面意思可以看出，GET(得到)请求一般用于信息的获取，而POST(发送)请求一般用于修改服务器上的资源。其实可以理解为GET请求是安全的，因为它一般用于获取信息，而不是修改信息。也就是说，GET请求一般用于查，而POST请求一般用于增、删、改。但是需要注意，GET发送的信息对任何人都是可见的，因为它所有的变量名和值都显示在URL中，使用URL发送参数，所以对发送信息的树梁也有限制，一般在2000个字符。</p>
+<pre><code>POST(发送)请求一般用于想服务器发送一些信息，一般用于修改服务器上的资源。通过POST方法，一般用来从表单发送一些数据，这些数据并不在URL中显示，对其他人不可见，所有的值都会嵌入HTTP请求体中。它对于发送信息的数量没有限制。
+
+
+
+大家可能听过这样一种说法：GET请求是幂等的。一个GET请求执行一次和执行一万次的效果是一样的，影像是相同的。比如从数据库中查询用户信息，并不会因为查询次数的多少而改变查询到的值。
+</code></pre><p>2.4.HTTP响应</p>
+<p>  一个HTTP响应一般由三部分组成：</p>
+<ol>
+<li>一个数字和文字组成的状态码，用于显示请求是否成功；</li>
+<li>响应头，和请求头一样包含许多信息，例如服务器类型，日期时间，内容类型和长度等；</li>
+<li>响应体，即响应正文</li>
+</ol>
+<p>响应的状态码/:</p>
+<p>1XX：信息类，表示收到Web浏览器请求，正在进一步处理中；</p>
+<p>2XX：成功，表示用户请求被正确接收和处理，例如：200 OK；</p>
+<p>3XX：重定向，表示请求没有成功，客户必须采取进一步的动作；</p>
+<p>4XX：客户端错误，表示客户端提交的请求有错误，例如：404 Not Found；</p>
+<p>5XX：服务器错误，表示服务器不能完成对请求的处理，例如：500     </p>
+<p>3-深入了解XMLHttpRequest</p>
+<p>3.1-XMLHttpRequest发送请求</p>
+<p>  XHR对象中有如下方法，可以将请求发送到服务器：</p>
+<p>open(method,url,async) send(string) </p>
+<p>  open方法中：method参数规定了请求的方式，如GET；url参数规定了请求的地址；async规定本次请求是否使用异步方式，默认true。通过open方法就可以调用HTTP请求，调用之后需要将请求发送到服务器，这时就需要使用send方法，它的参数string规定了本次请求参数的主体。在GET请求时其实是没有主体的，所有的参数都写在URL中，所以send方法可以不传参，或者传null；而使用POST的话send方法就一定要传参了，要不然没有什么意义。</p>
+<p>3.2-XMLHttpRequest取得响应</p>
+<p>  我们的请求发送到服务器之后，服务器总需要给出点响应，那么服务器如何获取响应呢</p>
+<p>responseText：获得字符串形式的响应数据</p>
+<p>responseXML：获得XML形式的响应数据</p>
+<p>status和statusText：以数字和文本形式返回HTTP状态码</p>
+<p>getAllResponseHeader()：获取所有的响应报头</p>
+<p>getResponseHeader(name)：查询响应头中某个字段的值</p>
+<p>  XHR通常都是异步使用的，我们发送一个请求，然后send方法就立刻返回了，那么怎么知道服务器响应是否正确了呢。上述的几个方法，只是用来获取响应值。而readyState属性是为了在响应返回成功的时候得到通知。readyState属性的值：</p>
+<ul>
+<li>0：请求未初始化，open还未调用；</li>
+<li>1：服务器连接已建立，open已经调用了；</li>
+<li>2：请求以接收，也就是接收到头信息了；</li>
+<li>3：请求处理中，也就是接收到响应主体了：</li>
+<li><p>4：请求已完成，且响应已就绪，也就是相应完成了</p>
+<p> 如果想知道一个服务器的响应有没有完成，只需要监听readyState属性值的变化：</p>
+</li>
+</ul>
+<p>var request = new XMLHttpRequest(); request.open(“GET”,”localhost/get”,true); request.send(); request.onreadystatechange = function(){     if(request.readState === 4 &amp;&amp; request.status === 200){        //do something…     } } </p>
+<p>同源：同协议 同域名 同端口</p>
+<p>同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制</p>
+<p>跨域：不同域之间相互请求资源，就算作“跨域”</p>
+<h2 id="————————————"><a href="#————————————" class="headerlink" title="————————————"></a>————————————</h2><ul>
+<li><p>一、简介</p>
+</li>
+<li><ul>
+<li>ajax是Asynchronous Javascript and XML的缩写，意思是执行异步的网络请求</li>
+<li>其表现形式为程序的执行顺序不依赖程序本身的书写顺序，则相反为同步。</li>
+<li>ajax技术可以使得向服务器请求数据的时候无需卸载页面，得到更好的体验</li>
+<li>ajax的核心是XMLHttpRequest对象，它实现了异步方式从服务器获取数据，也就是用XHR对象获取到服务器的数据，再使用DOM将数据更新到页面中</li>
+<li>虽然ajax名字中包含了XML，但是他只是一种通信手段，与具体数据格式没有关系，因为当时主流使用XML作为前后台通信数据的格式，所以名字中使用了XML；而现在主要使用的都是JSON格式的字符串</li>
+</ul>
+</li>
+<li><p>二、XMLHttpRequest对象</p>
+</li>
+<li><ul>
+<li>ajax的实现流程如下：</li>
+<li>1.创建XHR对象</li>
+<li>2.调用open()方法，创建请求</li>
+<li>3.调用send()方法，发送请求</li>
+<li>4.捕获请求状态，判断请求结果</li>
+<li>5.获取数据库返回的数据</li>
+<li>1、创建XHR对象</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>XHR对象首次实现是在ie5上，当时使用的是ActiveX对象，所以XHR下ie上有两个版本的实现方式，ie7以下的ActiveX对象与ie7及以上的XHR对象，其余浏览器统一都是使用的XHR对象</li>
+<li>所以创建对象的时候需要有兼容性写法</li>
+<li>if(window.XMLHttpRequest){</li>
+<li>var request = new XMLHttpRequest();</li>
+<li>}else{ //这是ie7以下的写法</li>
+<li>var request = new ActiveXObject(“Microsoft.XMLHttp”);}</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>2、调用open（）方法</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>XHR.open(method,url,boolean);</li>
+<li>open（）方法接收3个参数</li>
+<li>method：数据提交方式，字符串形式，可以使用”get”或”post”</li>
+<li>url：请求对象地址，字符串表示（get方式与post方式有差异）</li>
+<li>boolean：true（默认）表示异步请求，false表示同步请求（相信使用ajax都是为了异步的，所以这里就用true，或者不填写）这个可以省略，默认是true</li>
+<li>get方式请求</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>使用get方式提交数据时需要将提交内容以固定的格式附加在URL后面，格式如下：</li>
+<li>url = “地址 ? name1=value1 &amp; name2=value2”;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>post方式请求</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>使用post方式提交数据，提交内容是作为send()方法的参数提交的，所以URL后面无需附加参数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>3、调用send()方法</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>request.send(postbody);</li>
+<li>send（）方法接收一个参数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>postbody：字符串形式，填入需要提交的数据；如果没有提交的数据，可以填入null</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>get方式请求</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>因为get方式下的数据已经附加再URL后面提交，所以这里一般填入null</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>post方式请求</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>数据的格式如下：</li>
+<li>postbody = “name1 = value1 &amp;name2 = value2”；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>4、捕获请求状态，判断结果</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>send（）方法调用后，请求就会被提交到服务器；多数情况下，我们会发送异步请求检查请求过程当前的活动阶段，再判断请求是否返回成功</li>
+<li>XHR对象相关属性：</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>readyState：请求 /相应过程的当前活动阶段</li>
+<li>responseText：作为响应主体被返回的文本</li>
+<li>responseXML：如果相应的内容类型是text/xml或者application这个属性中将保存着响应数据的XMLDOM文档</li>
+<li>status：相应的HTTP状态</li>
+<li>statusText：HTTP状态说明</li>
+<li>我们利用原生的onreadystatechange事件来监听readyState变化</li>
+<li>readyState返回值如下：</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="E:/%E6%9C%89%E9%81%93%E4%BA%91%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/m15518161062_1@163.com/ad38e1a833554f31958c1b6c9aac497f/957-1929915.jpeg" alt="img"></p>
+<ul>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>只要readyState的值有一个值变为另一个值，就会触发一次onreadystatechange事件，可以利用此事件来返回监听到的请求/响应过程状态值</li>
+<li>我们关心的是readyState值为4的情况，因为这是代表所有数据已经准备就绪；同时如果status返回的是200，那么可以确定该次去请求/响应过程全部完成</li>
+<li>status返回值如下：</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="E:/%E6%9C%89%E9%81%93%E4%BA%91%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/m15518161062_1@163.com/c16fa927fe7e4e9f9a7a60fe02fed7ed/b71-1929915.jpeg" alt="img"></p>
+<ul>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>注意：这里不要使用statusText去判断，因为该值在跨浏览器时不可靠</li>
+<li>最后的返回结果，不管是什么类型内容，都会被保存在responseText中</li>
+<li>监听代码如下：</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="E:/%E6%9C%89%E9%81%93%E4%BA%91%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/m15518161062_1@163.com/a57b8b041bb44d5b910318e28be6cbc5/5ec-1929915.jpeg" alt="img"></p>
+<ul>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>综上所述的内容，就是整个ajax请求的全部流程，我们在js中最后拿到的就是后台返回的responseText，只是里面保存的一般来说是JSON格式的字符串，我们可以将其转换成数组或者对象后提取其中的键值对</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="993652a16fcd4d393523" data-cs="ae0d0d5c6357fbd129dbb68abb429b4a29dcd6e2" data-r="blog-comments" data-o="liutingfenga" data-a="liutingfenga" data-d="false">查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#————————————"><span class="toc-number">1.</span> <span class="toc-text">————————————</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
