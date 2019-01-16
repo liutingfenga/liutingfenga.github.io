@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hexo</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="tingfeng,"> 
+    <meta name="description" content="
+深拷贝和浅拷贝的主要区别就是其在内存中的存储数据类型不同。
+
+
+
+堆和栈都是内存中划分出来用来存储的区域。
+
+
+栈（stack）为自动分配的内存空间，它由系统自动释放；
+堆（heap）则是动态分配,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">JS深拷贝和浅拷贝</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">JS深拷贝和浅拷贝</h1>
+        <div class="stuff">
+            <span>二月 24, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/笔记/">笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <ul>
+<li><p>深拷贝和浅拷贝的主要区别就是其在内存中的存储数据类型不同。</p>
+</li>
+<li><p><img src="https://raw.githubusercontent.com/liutingfenga/liutingfenga.github.io/master/img/%E6%A0%88%E5%86%85%E5%AD%98%E5%92%8C%E5%A0%86%E5%86%85%E5%AD%98.PNG" alt="Image text"></p>
+</li>
+<li><p>堆和栈都是内存中划分出来用来存储的区域。</p>
+</li>
+<li><ul>
+<li>栈（stack）为自动分配的内存空间，它由系统自动释放；</li>
+<li>堆（heap）则是动态分配的内存，大小不定也不会自动释放。</li>
+</ul>
+</li>
+<li><p>基本数据类型（undefined，boolean，number，stringnull）</p>
+</li>
+<li><ul>
+<li>基本数据类型存放在栈中</li>
+<li>存放在占内存中的简单数据段，数据大小确定，内存空间大小可以分配，它直接按值存放的，所以可以直接访问。</li>
+<li>基本数据类型不可变</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>javascript中的原始值与对象（包括数组和函数）有着根本区别。原始值是不可更改的；任何方法都无法更改一个原始值。对数字和布尔值来说显然如此——改变数字的值本身就说不通，而对字符串来说就不那么明显。因为字符串看起来像由字符组成的数组，我们期望可以通过制定索引来假改字符串中的字符。时间上，javascript是禁止这样做的。字符串中所有的方法看上去返回了一个修改后的字符串，实践上返回的是一个新的字符串值。</li>
+<li>基本数据类型值不可变。</li>
+<li>操作的方法都是返回一个新字符串，并没有改变其原有的数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>引用类型</p>
+</li>
+<li><ul>
+<li>引用类型存放在堆中</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>引用类型（object）是存放在堆内存中的，变量实际上是一个存放在栈内存的指针，这个指针指向堆内存中的地址。每个空间大小不一样，要根据情况进行特定的分配。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>引用类型是可以直接改变其值的</li>
+<li>引用类型的比较是引用的比较</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>虽然变量a和变量b都是表示一个123的数组，但是其在内存中的位置不一样，也就是说变量a和b指向的不是同一个对象，所以他们是不相等的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/liutingfenga/liutingfenga.github.io/master/img/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D2.PNG" alt="Image text"></p>
+<ul>
+<li><p>传值和传址</p>
+</li>
+<li><ul>
+<li>浅拷贝只复制一层对象的属性，而深拷贝则递归复制了所有层级。</li>
+<li>浅拷贝是对值的复制，对于对象来说，浅拷贝是对对象地址的复制，并没有开辟新的栈，也就是说复制的结果是两个对象指向同一个地址，修改其中一个对象的属性，则另一个对象的属性也会改变；</li>
+<li>深拷贝则是开辟新的栈，两个对象对应两个不同的地址，修改一个对象的属性，并不会改变另一个对象的值</li>
+<li>传值</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>基本数据类型的赋值（=）是在内存中新开辟一段栈内存，然后再把再将值赋值到新的栈中。</li>
+<li>var a = 10;</li>
+<li>var b = a;</li>
+<li>a ++ ;</li>
+<li>console.log(a); // 11</li>
+<li>console.log(b); // 10</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/liutingfenga/liutingfenga.github.io/master/img/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D3.PNG" alt="img"></p>
+<ul>
+<li><ul>
+<li>传址</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>引用类型的赋值是传址。只是改变指针的指向。</li>
+<li>将存放在栈内存中的地址赋值给接收的变量</li>
+<li>var a = [1,2,3];</li>
+<li>var b = [1,2,3];</li>
+<li>b.push(4);</li>
+<li>console.log(b);//[1,2,3,4]</li>
+<li>console.log(a);[1,2,3,4]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="993652a16fcd4d393523" data-cs="ae0d0d5c6357fbd129dbb68abb429b4a29dcd6e2" data-r="blog-comments" data-o="liutingfenga" data-a="liutingfenga" data-d="false">查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

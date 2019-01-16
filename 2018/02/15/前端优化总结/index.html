@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hexo</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="tingfeng,"> 
+    <meta name="description" content="
+深拷贝和浅拷贝的主要区别就是其在内存中的存储数据类型不同。
+
+
+
+堆和栈都是内存中划分出来用来存储的区域。
+
+
+栈（stack）为自动分配的内存空间，它由系统自动释放；
+堆（heap）则是动态分配,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">前端优化总结</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">前端优化总结</h1>
+        <div class="stuff">
+            <span>二月 15, 2018</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="浏览器发送HTTP请求"><a href="#浏览器发送HTTP请求" class="headerlink" title="浏览器发送HTTP请求"></a>浏览器发送HTTP请求</h1><h2 id="减少请求次数"><a href="#减少请求次数" class="headerlink" title="减少请求次数"></a>减少请求次数</h2><ul>
+<li><p>资源合并</p>
+<ul>
+<li><p>使用打包工具</p>
+<p> 使用webpack等工具，对js和css资源进行打包，避免js或css文件过多。</p>
+<p> 但也要考虑打包文件过大的问题，需要再这之间进行综合考虑。</p>
+<p> 在SPA中常用的实践是，webpack提取出的公用文件先加载，然后路由相关的文件按需加载。</p>
+</li>
+</ul>
+</li>
+<li><p>精灵图</p>
+<p>多个小图合并后的图片。</p>
+<p>使用的时候使用background-position进行定位使用。</p>
+</li>
+</ul>
+<ul>
+<li><p>缓存</p>
+<ul>
+<li><p>HTTP Cache</p>
+<ul>
+<li><p>强缓存</p>
+<p>强缓存的特定是不需要询问服务器，它通过expires和cache-control来实现。cache-control的优先级高于expires，它们都用来表示过期时间，expires是存储时间戳，cache-control使用max-age来表示相对时间。</p>
+<p>cache-control 的no-cache不询问浏览器，直接请求服务器（进行协商缓存）。 而no-store则不是不使用任何缓存策略。 s-maxage只在代理服务器中生效。</p>
+<p>如果资源没有过期，则会直接使用该资源。</p>
+</li>
+<li><p>协商缓存</p>
+<p>协商缓存是请求服务器后，服务器来判断是返回新的资源，还是告诉浏览器使用旧的资源。</p>
+<p>服务器每次返回资源会带有Last-Modified时间戳，每次服务器请求带上If-Modified-Since的时间戳，由服务器来判断资源修改时间是否与该时间一致。</p>
+<p>last-modified有个问题是，虽然服务器文件修改时间变了，但是文件内容并没有真正变化</p>
+<p>所有加入了ETag，是由文件内容计算出来的唯一标识。请求的时候会以If-None-Match带上该值，来由服务器判断</p>
+<ul>
+<li><ul>
+<li>Service Worker Cache</li>
+<li>Memory Cache &amp; Disk Cache</li>
+</ul>
+</li>
+</ul>
+<p>他们是配合http缓存的。 memory cache命中最快，但是它周期较短，base64的图片，较小的js和css能够有较大几率被写进内存，这没有确定的定论。 其他较大的js、css和图片等会被直接写进硬盘，进行缓存。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>存储</p>
+<ul>
+<li>cookie<ul>
+<li>cookie最大为4k，通常用来存储一些用户登录状态，每次请求，浏览器都会带上相同域名下的cookie</li>
+</ul>
+</li>
+<li><p>WebStrotage</p>
+<ul>
+<li>webStorage分为两种，sessionStorage和localStorage，它们的大小在5-10M之间。</li>
+<li>都是以键值对的方式进行存储的。</li>
+<li>sessionStorage与localStorage的不同在于生命周期的不同，sessionStorage在tab关闭后，就不再存在了，而localStorage的永久存储，除非主动删除</li>
+</ul>
+</li>
+<li><p>indexDB</p>
+<ul>
+<li>浏览器端的“数据库”</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="缩小请求体积"><a href="#缩小请求体积" class="headerlink" title="缩小请求体积"></a>缩小请求体积</h2><ul>
+<li><p>资源压缩</p>
+<ul>
+<li><p>Gzip</p>
+<ul>
+<li>传输的时候可以在服务器端开启gzip压缩，可以有效减少传输文件的大小，可以在响应头content-encoding: gzip中看到。</li>
+</ul>
+</li>
+<li><p>代码压缩</p>
+<ul>
+<li>使用一些代码压缩工具，删除掉无用的注释、空行和缩减名称等操作来减少文件体积。</li>
+</ul>
+</li>
+<li><p>图片压缩</p>
+<ul>
+<li><p>图片是网页上占用很多流量的一种资源。如果在图片损失一些颜色和像素的情况下并不会对用户体验有太大影响，那么就应该对图片进行压缩。</p>
+<p>同时可以对图片做一些裁切和缩小等操作，来减小图片的体积。</p>
+</li>
+</ul>
+</li>
+<li><p>图片选用正确的格式</p>
+<ul>
+<li>PNG<ul>
+<li>无损格式，压缩率一般，支持透明背景，常用于透明图片或者Icon等。</li>
+</ul>
+</li>
+<li>JPG<ul>
+<li>有损格式，压缩率较好，常用于复杂的大图，不支持透明背景。</li>
+</ul>
+</li>
+<li>SVG<ul>
+<li>矢量图形，可编程。在各分辨率下不失真，但是渲染复杂图形较消耗性能。常用于简单图形。</li>
+</ul>
+</li>
+<li>WEBP<ul>
+<li>无损格式，相较于PNG和JPG来说，压缩率更好，同时支持透明背景。唯一的缺点是兼容性不好。可用于兼容性好的浏览器，用JPG和PNG做回退机制。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>作者：Xiaowei
+
+链接：https://juejin.im/post/5c37055f6fb9a049b07d8d1a
+
+来源：掘金
+
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+</code></pre>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="993652a16fcd4d393523" data-cs="ae0d0d5c6357fbd129dbb68abb429b4a29dcd6e2" data-r="blog-comments" data-o="liutingfenga" data-a="liutingfenga" data-d="false">查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器发送HTTP请求"><span class="toc-number">1.</span> <span class="toc-text">浏览器发送HTTP请求</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#减少请求次数"><span class="toc-number">1.1.</span> <span class="toc-text">减少请求次数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缩小请求体积"><span class="toc-number">1.2.</span> <span class="toc-text">缩小请求体积</span></a></li></ol></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
